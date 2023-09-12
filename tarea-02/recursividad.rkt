@@ -3,8 +3,9 @@
 
 (define (countdown n)
   (cond
-    ((zero? n) '())              
+    ((< n 0) '())
     (else (cons n (countdown (- n 1))))))
+
 
 (define (insertL simbolo1 simbolo2 lista)
   (if (null? lista)
@@ -79,15 +80,42 @@
   
   (binary->natural-helper binary-list 0 0))
 
-(define (dividend-divisible? dividend divisor)
-  (if (< dividend divisor)
-      (= dividend 0)
-      (dividend-divisible? (- dividend divisor) divisor)))
 
 (define (div dividend divisor)
-  (if (dividend-divisible? dividend divisor)
-      1
-      (+ 1 (div (- dividend divisor) divisor))))
+  (if (= (remainder dividend divisor) 0)
+      (let loop ((dividend dividend) (result 0))
+        (if (< dividend divisor)
+            result
+            (loop (- dividend divisor) (+ result 1))))
+
+      '("Error")))
+
+(define (append-map func lst)
+  (if (null? lst)
+      '()
+      (append (func (car lst)) (append-map func (cdr lst)))))
+
+
+(define (set-difference s1 s2)
+  (cond
+    ((null? s1) '())
+    ((null? s2) s1)  
+    ((member (car s1) s2) (set-difference (cdr s1) s2)) 
+    (else (cons (car s1) (set-difference (cdr s1) s2))))) 
+
+(define (foldr func initial-accumulator lst)
+  (if (null? lst)
+      initial-accumulator
+      (func (car lst) (foldr func initial-accumulator (cdr lst)))))
+
+(define (powerset lst)
+  (if (null? lst)
+      (list '())
+      (let ((rest-powerset (powerset (cdr lst)))
+            (first-elem (car lst)))
+        (append (map (lambda (subset) (cons first-elem subset))
+                     rest-powerset)
+                rest-powerset))))
 
 
 
@@ -130,5 +158,12 @@
 
  (binary->natural '(0 0 1 1))
 
+(div 25 5)
 
+(append-map countdown (countdown 5))
 
+(set-difference '(1 2 3 4 5) '(2 6 4 8))
+
+(foldr * 1 '(1 2 3 4))
+
+(powerset '(3 2 1))
