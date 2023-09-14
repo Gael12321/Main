@@ -1,6 +1,6 @@
 #lang racket
 
-(define pi 3.1416)
+(define pi 3.14)
 
 (define (area-circle radio)
   (* pi (* radio radio)))
