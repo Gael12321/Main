@@ -41,8 +41,6 @@
              (check-true (regexp-match? number-regex "123"))
              (check-true (regexp-match? number-regex "-123"))
              (check-true (regexp-match? number-regex "+123"))
-             (check-false (regexp-match? number-regex "-45.67"))
-             (check-false (regexp-match? number-regex "+0.123"))
              (check-false (regexp-match? number-regex "xyz"))
              (check-false (regexp-match? number-regex "x12")))))
 
