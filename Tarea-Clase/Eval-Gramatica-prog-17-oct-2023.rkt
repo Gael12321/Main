@@ -25,9 +25,10 @@
 
 
 (define (eval-def def env)
-  (if(eq? (first def) "define")
-     (eval-exp (third def) env)
-     (error "No valido")))
+(cond    [(and(list? def)
+         (= (lenght def) 3)
+         (eq? (first def) "define")
+     (eval-exp (third def) env)]))
 
 (define (eval-prog prog env)
   (cond [(and[list? prog]
