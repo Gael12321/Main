@@ -21,6 +21,8 @@
            ls))
   (apply string-append ls))
 
+
+;Problema 2.1
 (define (take l n)
   (cond 
     [(or (null? l) (equal? n 0 ))
@@ -28,7 +30,7 @@
     [else
      (cons (first l) (take (rest l) (sub1 n)))]))
 
-
+;Problema 2.2
 (define (drop l n)
   (cond 
     [(or (null? l) (equal? n 0 ))
@@ -36,7 +38,7 @@
     [else
      (drop (rest l)(sub1 n))]))
 
-
+;Problema 3
 (define (bundle s n)
   (cond
     [(null? s) null]

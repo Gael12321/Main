@@ -8,6 +8,7 @@
 (define ps-tests
   (test-suite
    "Pruebas para los problemas de ps.rkt"
+   ;Problema 1 :
    (test-case "Bundle"
               
               (check-equal? (bundle (explode "abcdef")2)
