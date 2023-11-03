@@ -42,11 +42,32 @@
 (define (bundle s n)
   (cond
     [(null? s) null]
+    [(equal? n 0) null]
     [else
      (cons (implode (take s n))
            (bundle (drop s n) n))]))
 
+;Problema 5
+(define (list->chunks l n)
+ (cond
+    [(null? l) null]
+    [(equal? n 0) null]
+    [else
+     (cons (take l n)
+        (list->chunks (drop l n) n))]))
 
+(define (bundle-chunk s n)
+  (map implode(list->chunks s n))) 
 
+;Problema 6
+(define (partition s n)
+  (cond
+    [(null? s) null]
+    [(zero? n) null]
+    [else
+     (if (<= (string-length s) n)
+         (list s)
+         (cons (substring s 0 n)
+               (partition (substring s n) n)))]))
 
 (provide (all-defined-out))
