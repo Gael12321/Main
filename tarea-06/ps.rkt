@@ -70,4 +70,17 @@
          (cons (substring s 0 n)
                (partition (substring s n) n)))]))
 
+
+(define (isort ls)
+  (if (empty? ls)
+  null
+  (insert (first ls)
+  (isort (rest ls)))))
+
+(define (insert n ls)
+  (cond
+  [(empty? ls) (list n)]
+  [(>=n (first ls)) (cons n ls)]
+  [else (cons (first ls)(insert n (rest ls)))]))
+
 (provide (all-defined-out))
