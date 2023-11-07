@@ -114,7 +114,7 @@
                          (guard parse-expression "an expression")
                          (guard (expect-sugar close-paren-token?) "close parenthesis"))
               (parse/seq emptylist-exp
-                         (expect-sugar div-token?))
+                         (expect-sugar emptylist-token?))
               (parse/seq zero?-exp
                          (expect-sugar zero?-token?)
                          (guard (expect-sugar open-paren-token?) "open parenthesis")
