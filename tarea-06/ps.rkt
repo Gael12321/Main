@@ -54,7 +54,7 @@
     [(equal? n 0) null]
     [else
      (cons (take l n)
-        (list->chunks (drop l n) n))]))
+           (list->chunks (drop l n) n))]))
 
 (define (bundle-chunk s n)
   (map implode(list->chunks s n))) 
@@ -71,16 +71,43 @@
                (partition (substring s n) n)))]))
 
 
-(define (isort ls)
-  (if (empty? ls)
-  null
-  (insert (first ls)
-  (isort (rest ls)))))
+;(define (isort ls)
+;  (if (empty? ls)
+;      null
+;      (insert (first ls)
+;              (isort (rest ls)))))
+;
+;(define (insert n ls)
+;  (cond
+;    [(empty? ls) (list n)]
+;    [(>= n (first ls)) (cons n ls)]
+;    [else (cons (first ls)(insert n (rest ls)))]))
 
-(define (insert n ls)
+(define (insert n ls ord)
   (cond
-  [(empty? ls) (list n)]
-  [(>=n (first ls)) (cons n ls)]
-  [else (cons (first ls)(insert n (rest ls)))]))
+    [(empty? ls) (list n)]
+    [(equal? ord "asc")
+     (if (< n (first ls))
+         (cons n ls)
+         (cons (first ls) (insert n (rest ls) ord)))]
+    [(equal? ord "desc")
+     (if (> n (first ls))
+         (cons n ls)
+         (cons (first ls) (insert n (rest ls) ord)))]))
+
+(define (quicksort ls)
+  (cond
+    [(empty? ls) null]
+    [else
+     (define pivot (first ls))
+     (append (quicksort (smallers ls pivot))
+             (list pivot)
+             (quicksort (largers ls pivot)))]))
+
+(define (smaller ls pivote)
+
+(define (largers ls pivote)
+
+
 
 (provide (all-defined-out))
