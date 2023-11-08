@@ -96,16 +96,9 @@
          (cons (first ls) (insert n (rest ls) ord)))]))
 
 
-;Problema 9
-(define (quicksort ls)
-  (cond
-    [(empty? ls) null]
-    [else
-     (define pivot (first ls))
-     (append (quicksort (smallers ls pivot))
-             (list pivot)
-             (quicksort (largers ls pivot)))]))
 
+
+;Problema 9.1
 (define (smallers ls pivot)
   (cond
     [(empty? ls) null]
@@ -114,7 +107,7 @@
     [else
      (smallers (rest ls) pivot)]))
 
-
+;Problema 9.2
 (define (largers ls pivot)
   (cond
     [(empty? ls) null]
@@ -123,15 +116,35 @@
     [else
      (largers (rest ls) pivot)]))
 
-;Problema 11
-(define (quicksortss ls )
+
+;Problema 10.2
+(define (quicksort ls)
   (cond
     [(empty? ls) null]
     [else
      (define pivot (first ls))
+     (define pivot-igual (filter (lambda (x) (equal? x pivot)) ls))
      (append (quicksort (smallers ls pivot))
-             (list pivot)
+             pivot-igual
              (quicksort (largers ls pivot)))]))
+
+;Problema 11 ;Agrega el elemento falta shortearlo asi de chill 
+(define (quicksort n ls ord)
+  (cond
+    [(empty? n) null]
+    [(empty? ls) null]
+    [(equal? ord "asc")
+     (define pivot (first ls))
+     (define pivot-igual (filter (lambda (x) (equal? x pivot)) ls))
+     (append (append (quicksort n (smallers ls pivot) ord)            
+                     pivot-igual
+                     (quicksort n (largers ls pivot) ord)))]
+    [(equal? ord "desc")
+     (define pivot (first ls))
+     (define pivot-igual (filter (lambda (x) (equal? x pivot)) ls))     
+     (append (quicksort n (largers ls pivot) ord)             
+             pivot-igual
+             (quicksort n (smallers ls pivot) ord))]))
 
 
 (provide (all-defined-out))
