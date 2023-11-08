@@ -49,7 +49,7 @@
 
 ;Problema 5
 (define (list->chunks l n)
- (cond
+  (cond
     [(null? l) null]
     [(equal? n 0) null]
     [else
@@ -70,12 +70,12 @@
          (cons (substring s 0 n)
                (partition (substring s n) n)))]))
 
-
-;(define (isort ls)
-;  (if (empty? ls)
-;      null
-;      (insert (first ls)
-;              (isort (rest ls)))))
+;Problema 7
+(define (isort ls)
+  (if (empty? ls)
+      null
+      (insert (first ls)
+              (isort (rest ls)))))
 ;
 ;(define (insert n ls)
 ;  (cond
@@ -95,6 +95,8 @@
          (cons n ls)
          (cons (first ls) (insert n (rest ls) ord)))]))
 
+
+;Problema 9
 (define (quicksort ls)
   (cond
     [(empty? ls) null]
@@ -104,10 +106,32 @@
              (list pivot)
              (quicksort (largers ls pivot)))]))
 
-(define (smaller ls pivote)
+(define (smallers ls pivot)
+  (cond
+    [(empty? ls) null]
+    [(< (first ls) pivot)
+     (cons (first ls) (smallers (rest ls) pivot))]
+    [else
+     (smallers (rest ls) pivot)]))
 
-(define (largers ls pivote)
 
+(define (largers ls pivot)
+  (cond
+    [(empty? ls) null]
+    [(> (first ls) pivot)
+     (cons (first ls) (largers(rest ls) pivot))]
+    [else
+     (largers (rest ls) pivot)]))
+
+;Problema 11
+(define (quicksortss ls )
+  (cond
+    [(empty? ls) null]
+    [else
+     (define pivot (first ls))
+     (append (quicksort (smallers ls pivot))
+             (list pivot)
+             (quicksort (largers ls pivot)))]))
 
 
 (provide (all-defined-out))
