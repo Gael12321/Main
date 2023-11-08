@@ -129,26 +129,28 @@
              (quicksort (largers ls pivot)))]))
 
 ;Problema 11 ;Agrega el elemento falta shortearlo asi de chill 
-(define (quicksort n ls ord)
+(define (quicksort-add n ls ord)
   (cond
     [(empty? n) null]
     [(empty? ls) null]
     [(equal? ord "asc")
      (define pivot (first ls))
      (define pivot-igual (filter (lambda (x) (equal? x pivot)) ls))
-     (append (append (quicksort n (smallers ls pivot) ord)            
+     (append (append (quicksort-add n (smallers ls pivot) ord)            
                      pivot-igual
-                     (quicksort n (largers ls pivot) ord)))]
+                     (quicksort-add n (largers ls pivot) ord)))]
     [(equal? ord "desc")
      (define pivot (first ls))
      (define pivot-igual (filter (lambda (x) (equal? x pivot)) ls))     
-     (append (quicksort n (largers ls pivot) ord)             
+     (append (quicksort-add n (largers ls pivot) ord)             
              pivot-igual
-             (quicksort n (smallers ls pivot) ord))]))
+             (quicksort-add n (smallers ls pivot) ord))]))
 
-(define (add-quicksort n ls ord) ;El poderoso recursion hace que agregue el valor de n cada vez que se llama asi que gg toco agregar algo mas
-  (append (list n) (quicksort n ls ord)))
-
+(define (add-quicksort n ls ord) ;El poderoso recursion hace que agregue el valor de n cada vez que se llama asi que gg toco agregar algo mas  
+  (define(new-list n ls)
+    (if (empty? ls) (list n)
+        (append (list n) ls)))
+  (quicksort-add n (new-list n ls) ord))
 
 
 (provide (all-defined-out))
