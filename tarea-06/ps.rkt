@@ -146,5 +146,9 @@
              pivot-igual
              (quicksort n (smallers ls pivot) ord))]))
 
+(define (add-quicksort n ls ord) ;El poderoso recursion hace que agregue el valor de n cada vez que se llama asi que gg toco agregar algo mas
+  (append (list n) (quicksort n ls ord)))
+
+
 
 (provide (all-defined-out))
