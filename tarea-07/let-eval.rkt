@@ -45,10 +45,15 @@
 
     
     [(cons-exp exp1 exp2)
-    ]
+    (let ([val1 (value-of exp1 env)]
+         [val2 (value-of exp2 env)])
+         (pair-val (cons val1 val2)))]
 
     [(cdr-exp exp1)
-     ]
+       (let ([val1 (value-of exp1 env)]
+         [val2 (value-of exp2 env)])
+         (pair-val (cons val1 val2))
+         (car (pair-val)))]
 
     [(car-exp exp1)
      ]
