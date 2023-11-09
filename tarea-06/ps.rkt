@@ -153,6 +153,23 @@
   (quicksort-add n (new-list n ls) ord))
 
 
+;Problema 12
+
+(define (quicksort-isort n ls ord)
+  (define umbral 15)
+  (if (<= (length ls) umbral)
+      (isort n ls ord)
+      (add-quicksort n ls ord)))
+
+
+;Problema 13
+
+;Problema 14
+
+
+
+
+
 
 
 

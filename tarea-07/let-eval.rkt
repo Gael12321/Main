@@ -45,19 +45,19 @@
 
     
     [(cons-exp exp1 exp2)
-     (cons-val (value-of exp1 env) (value-of exp2 env))]
+    ]
 
     [(cdr-exp exp1)
-     (expval->list (cdr (expval->list (value-of exp1 env))))]
+     ]
 
     [(car-exp exp1)
-     (expval->num (car (expval->list (value-of exp1 env))))]
+     ]
 
     [(null?-exp exp1)
-     (bool-val (null? (expval->list (value-of exp1 env))))]
+     (bool-val (null? ()))]
     
     [(emptylist-exp)
-     (list-val '())]
+     ]
 
 
     [(if-exp exp1 exp2 exp3)
