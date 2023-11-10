@@ -58,12 +58,12 @@
                             (list "abc" "def")))
 
    ;Problema 7 :
-   (test-case "add-isort" ;manda a llamar al isort pero no jala asi que gg
-              (check-equal? (add-isort 1 (list 2 3 4 5) "asc")
+   (test-case "isort" ;manda a llamar al isort pero no jala asi que gg
+              (check-equal? (isort 1 (list 2 3 4 5) "asc")
                             (list 1 2 3 4 5))
-              (check-equal? (add-isort 5 (list 1 2 3 4) "desc")
+              (check-equal? (isort 5 (list 1 2 3 4) "desc")
                             (list 5 4 3 2 1))
-              (check-equal? (add-isort 3 (list 1 2 4 5) "asc")
+              (check-equal? (isort 3 (list 1 2 4 5) "asc")
                             (list 1 2 3 4 5)))
 
  ; Pruebas para la función smallers

@@ -100,13 +100,11 @@
         [(eq? ord "asc")
          (if (< n (first ls))
              (cons n ls)
-             (let ((mid (isort n (rest ls) ord)))
-               (cons (first ls) mid)))]
+             (cons (first ls) (isort n (rest ls) ord)))]
         [(eq? ord "desc")
          (if (> n (first ls))
-             (cons (first ls) (isort n (rest ls) ord))
-             (cons n ls))]))
-
+             (cons n ls)
+             (cons (first ls) (isort n (rest ls) ord)))]))
 
 ;Problema 9.1
 ;;; smallers : (listof a?) a? -> (listof a?)
