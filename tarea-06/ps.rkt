@@ -91,26 +91,21 @@
                (partition (substring s n) n)))]))
 
 ;Problema 7 
-;;; add-isort : integer? (listof integer?) string? -> (listof integer?)
-;;; Toma un número entero, una lista de números enteros y manda a llamar a la funcion isort para con la nueva lista con el numero n agregado
-;;; Checa si la lista esta vacia y si lo esta regresa el valor n agregado, si no esta vacia agrega el valor agregado a la lista y manda a llamar a isort  con la nueva lista generada
-(define (add-isort n ls ord)
-  (define (new-list n ls)
-    (if (empty? ls) (list n)
-        (append (list n) ls)))
-  (isort n (new-list n ls) ord))
 
 ;; isort : integer? (listof integer?) string? -> (listof integer?)
 ;;; Toma una lista de números enteros y un orden de clasificación, y devuelve una nueva lista que contiene los números enteros de la lista original ordenados según el orden dado.
 ;;; Funciona recursivamente, comparando los elementos de la lista y luego intercambiando los elementos si están en el orden incorrecto.
 (define (isort n ls ord)
-  (cond[(empty? ls) (list n)]
-  [(equal? ord "asc")
-   (if (>= n (first ls)) (cons n ls)
-       (cons (first ls) (isort n (rest ls))))]
-  [(equal? ord "desc")
-   (if (<= n (first ls)) (cons n ls)
-       (cons (first ls) (isort n (rest ls))))]))
+  (cond [(empty? ls) (list n)]
+        [(eq? ord "asc")
+         (if (< n (first ls))
+             (cons n ls)
+             (let ((mid (isort n (rest ls) ord)))
+               (cons (first ls) mid)))]
+        [(eq? ord "desc")
+         (if (> n (first ls))
+             (cons (first ls) (isort n (rest ls) ord))
+             (cons n ls))]))
 
 
 ;Problema 9.1
@@ -192,9 +187,9 @@
 ;;; Toma un número entero, una lista y un orden de clasificación, y devuelve una nueva lista que contiene los elementos de la lista original ordenados según el orden dado.
 ;;; Utiliza el algoritmo de ordenación por inserción si la lista es lo suficientemente pequeña, y el algoritmo de ordenación rápida en caso contrario.
 (define (quicksort-isort n ls ord)
-  (define umbral 15)
+  (define umbral 10)
   (if (<= (length ls) umbral)
-      (add-isort n ls ord)
+      (isort n ls ord)
       (add-quicksort n ls ord)))
 
 
