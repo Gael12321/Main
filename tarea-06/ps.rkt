@@ -236,7 +236,8 @@
         (append (list n) ls)))
   (quicksort-add-filter n (new-list n ls) ord))
 
-
+;Problema 16
+;El 
 
 
 (provide (all-defined-out))
