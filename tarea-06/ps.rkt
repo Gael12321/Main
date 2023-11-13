@@ -110,6 +110,7 @@
 ;;; smallers : (listof a?) a? -> (listof a?)
 ;;; Toma una lista y un elemento, y devuelve una nueva lista que contiene todos los elementos de la lista original que son menores que el elemento dado.
 ;;; Funciona recursivamente, comparando los elementos de la lista con el elemento dado y luego agregando los elementos a la nueva lista si son menores que el elemento dado.
+
 (define (smallers ls pivot)
   (cond
     [(empty? ls) null]
@@ -237,7 +238,32 @@
   (quicksort-add-filter n (new-list n ls) ord))
 
 ;Problema 16
-;El 
 
+
+
+;Problema 17
+
+;(define (smallers l n)
+;  (cond
+;    [(empty? l) '()]
+;    [else (if (<= (first l) n)
+;              (cons (first l) (smallers (rest l) n))
+;              (smallers (rest l) n))]))
+;En el caso de que el primer elemento first l no es menor o igual a n, la llamada recursiva pasa al siguiente elemento de la lista rest l,
+;asi que puede llegar a haber no-terminacion si no existen elementos iguales o menores a n en el inico de la lista
+
+(define (gcd-structural n m)
+  (define (find-largest-divisor k)
+    (cond [(= i 1) 1]
+          [(= (remainder n i) (remainder m i) 0) i]
+          [else (find-largest-divisor (- k 1))]))
+  (find-largest-divisor (min n m)))
+
+(define (gcd-generative n m)
+  (define (find-largest-divisor max min)
+    (if (= min 0)
+        max
+        (find-largest-divisor min (remainder max min))))
+  (find-largest-divisor (max n m) (min n m)))
 
 (provide (all-defined-out))

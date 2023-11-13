@@ -14,5 +14,9 @@ compiled/
 *.rar
 *.tar
 *.zip
+*.AUX
+*.fls
+*.log
+*.fdb_latexmk
 \#*
 .\#*
