@@ -57,6 +57,9 @@
     [(emptylist-exp)
      (emptylist-val)]
 
+    [(list-exp)
+    ()]
+
 
     [(if-exp exp1 exp2 exp3)
      (if (expval->bool (value-of exp1 env))
