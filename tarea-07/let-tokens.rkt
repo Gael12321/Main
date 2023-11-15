@@ -23,6 +23,7 @@
 (struct cdr-token token () #:transparent)
 (struct null?-token token () #:transparent)
 (struct emptylist-token token () #:transparent)
+(struct list-token token () #:transparent)
 (struct if-token token () #:transparent)
 (struct then-token token () #:transparent)
 (struct else-token token () #:transparent)
@@ -53,6 +54,7 @@
   [struct cdr-token  ()]
   [struct null?-token  ()]
   [struct emptylist-token  ()] 
+  [struct list-token ()]
   [struct if-token ()]
   [struct then-token ()]
   [struct else-token ()]

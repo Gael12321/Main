@@ -37,6 +37,7 @@
                     [(cdr-token) "cdr operator"]
                     [(null?-token) "null? operator"]
                     [(emptylist-token) "empty operator"]
+                    [(list-token)"list operator"]
                     [(comma-token) "a comma"]
                     [(if-token) "if keyword"]
                     [(then-token) "then keyword"]
@@ -115,6 +116,8 @@
                          (guard (expect-sugar close-paren-token?) "close parenthesis"))
               (parse/seq emptylist-exp
                          (expect-sugar emptylist-token?))
+              (parser/seq list-exp)
+                         )
               (parse/seq zero?-exp
                          (expect-sugar zero?-token?)
                          (guard (expect-sugar open-paren-token?) "open parenthesis")

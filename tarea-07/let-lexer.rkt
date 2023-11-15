@@ -91,6 +91,10 @@
     (stream-cons
      (pos-token (emptylist-token) start-pos end-pos)
      (lex-let input-port))]
+   ["list"
+    (stream-cons
+     (pos-token (list-token) start-pos end-pos)
+     (lex-let input-port))]
    [","
     (stream-cons
      (pos-token (comma-token) start-pos end-pos)
