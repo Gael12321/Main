@@ -126,10 +126,10 @@
                           (guard (expect-sugar open-paren-token?) "open parenthesis")
                           (parse/alt 
                             (guard (expect-sugar close-paren-token?) "close parenthesis")
-                          (parse/seq cons
-                            (guard parse-expression "some expression")
+                            (parse/seq cons
+                              (guard parse-expression "some expression")
                           
-                          )            
+                          )))            
               (parse/seq zero?-exp
                          (expect-sugar zero?-token?)
                          (guard (expect-sugar open-paren-token?) "open parenthesis")
