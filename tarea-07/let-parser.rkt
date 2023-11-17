@@ -122,6 +122,7 @@
                          (guard parse-expression "an expression")
                          (guard (expect-sugar close-paren-token?) "close parenthesis"))
               (parser/seq list-exp
+<<<<<<< Updated upstream
                           (expect-sugar list-token?)
                           (guard (expect-sugar open-paren-token?) "open parenthesis")
                           (parse/alt 
@@ -130,6 +131,15 @@
                               (guard parse-expression "some expression")
                           
                           )))            
+=======
+                         (expect-sugar list-token?)
+                         (guard (expect-sugar open-paren-token?) "open parenthesis")
+                         (guard parse-expression "an expression")
+                         (guard (expect-sugar comma-token?) "a comma")
+                         (guard parse-expression "an expression")
+                         (guard (expect-sugar close-paren-token?) "close parenthesis")
+              
+>>>>>>> Stashed changes
               (parse/seq zero?-exp
                          (expect-sugar zero?-token?)
                          (guard (expect-sugar open-paren-token?) "open parenthesis")
