@@ -10,8 +10,27 @@
     Tarea-07 \linebreak
     Noviembre 2023 \linebreak
 \end{center}
+
 1.-Extiende el lenguaje agregando un nuevo operador $minu$ que toma como argumento $n$ y regresa $-n$.Por ejemplo, el valor de minus(-(minus(5),9)) debe ser 14 \newline
 Respuesta: \newline
+
+\textbf{Especificacion Lexica :} \newline
+
+Minus = Minus \\
+
+\textbf{Especificacion Sintactica :} \newline
+
+Concreta :Expression $\Rightarrow $ minus (Expression) \\
+
+Abstracta : (minus-exp exp1)\\
+
+
+\textbf{Especificacion Semantica :} \newline
+$$
+\frac{\mathcal{E} }{\mathcal{E} 
+}
+$$
+
 
 2.-Extiende el lenguaje agregando operadores para la suma, multiplicacion y conciente de enteros. \newline
 Respuesta: \newline
@@ -26,13 +45,43 @@ Respuesta: \newline
 Respuesta: \newline
 
 7.-Incorpora al lenguaje expresiones $cond$. Usa la gramatica 
-$$ Expression \rightarrow cond {Expression \Rightarrow Expression}* end$$
-En esta expresión, las expresiones de los lados izquierdos de los => son evaluadas en orden
+$$ Expression \Rightarrow cond {Expression \Rightarrow Expression}* end$$
+En esta expresión, las expresiones de los lados izquierdos de los $\Rightarrow$  son evaluadas en orden
 hasta que una de ellas regresa un valor verdadero. Entonces el valor de toda la expresión es
-el valor de la expresión correspondiente al lado derecho de esa =>. Si ninguno de los lados
-izquierdos es verdadero, la expresión debe reportar un error.
+el valor de la expresión correspondiente al lado derecho de esa $\Rightarrow$ . Si ninguno de los lados
+izquierdos es verdadero, la expresión debe reportar un error. \newline
 Respuesta: \newline
 
+8.- Cambia los valores del lenguaje para que los enteros sean los unicos valores expresados. Modifica if para que le valor de 0 sea tratado como falso y todos los otros sean tratados como verdaders. Modifica los predicados de manera consistente.\newline
+Respuesta: \newline
 
+9.-Como una alternativa al ejercicio anterior, agrega una nueva categoria sintáctica $Bool-exp$ de expresiones booleanas al lenguaje. Cambia la producción para expresiones condicionales para que sea \newline
+$$
+Expression \Rightarrow if Bool-exp  \: then \: Expression \: else  \:Expression
+$$
 
+Escribe Producciones apropiadas para $Bool-exp$ y especifica su semantica con $Value-of-bool-exp$ (Puedes abreviarlo como $B$). ¿En dónde terminan estando los predicados del ejercico 3 con este cambio? \newline
+
+Respuesta: \newline
+
+10.-Modifica la implementacion del intérprete agragando una nueva operacion $print$ que tome un argumento, lo imprime y regresa el entero 1. ¿Por qué esta operacion no es expresable en nuestro metodo de especificacion formal? \newline
+Respuesta: \newline
+
+11.-Extiende el lenguaje para que las expresiones $let$ puedan vincular una cantidad arbitraria de variables, usando la produccion,\newline
+$$
+Expression \Rightarrow  let \: \{ identifier = Expression* \}   \: in \: Expression
+$$
+Respuesta: \newline
+
+12.- Extiende el lenguaje con unan expression Let* que funciona como en racket.\newline
+Respuesta: \newline
+
+13.- Agrega una expresion al lenguaje de acuerdo a la siguiente regla\newline
+
+$$
+Expression \Rightarrow  unpack \:\: \:  \{identifier\}* = Expression \:\:  in \: \:Expression
+$$
+
+tal que unpack x y z = lst in ... vincula x , y y z a los elementos de lst si lst es una lista con exactamente tres elementos, reportando un error en otro caso.\newline
+Respuesta: \newline
 \end{document}
