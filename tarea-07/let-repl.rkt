@@ -3,6 +3,18 @@
 (require "let-interp.rkt"
          "let-vals.rkt")
 
+(define (printval str)
+  (match str
+    [(num-val x) (printf "~a" x)]
+    [(bool-val x) (printf "~a" (if x "true" "false"))]
+    [(pair-val x)
+     (printf "(")
+     (printval (car x))
+     (printlist (cdr x))
+     (printf ")")]
+    [(null-val) (printf "()")]))
+
+
 (define (get-line)
   (define ch (peek-char))
   (cond [(eof-object? ch)

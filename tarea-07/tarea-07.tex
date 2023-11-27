@@ -1,4 +1,6 @@
 \documentclass{article}
+\usepackage{amsmath}
+
 
 \author{Gael Balderrama Dominguez}
 \title{Tarea-07}
@@ -26,46 +28,412 @@ Abstracta : (minus-exp exp1)\\
 
 
 \textbf{Especificacion Semantica :} \newline
-$$
-\frac{\mathcal{E} }{\mathcal{E} 
-}
-$$
+
+(value-of (minus-exp $exp1$)$\rho$) = (-(num-val $n$ )) \\
+
+
+$$\frac{\mathcal{E}(-(0, exp1),\rho)=x}{\mathcal{E}(minus(exp1),\rho ) = x}$$\\
 
 
 2.-Extiende el lenguaje agregando operadores para la suma, multiplicacion y conciente de enteros. \newline
 Respuesta: \newline
 
-3.- Agrega un predicado de igualdad numerica $equal?$ y predicados de orden $greater?$ y $less?$ al conjunto de operaciones de lenguajes LET.
+\textbf{Especificacion Lexica :} \newline
+
+Suma = + \\
+
+Multiplicacion = * \\
+
+Division = / \\
+
+\textbf{Especificacion Sintactica :} \newline
+
+Concreta :Expression $\Rightarrow $ +(Expression,Expression) \\
+
+
+Concreta :Expression $\Rightarrow $ *(Expression,Expression) \\
+
+
+Concreta :Expression $\Rightarrow $ /(Expression,Expression) \\
+
+
+Abstracta : (Sum-exp exp1 exp2) \\
+
+Abstracta : (Mult-expexp1 exp2) \\
+
+Abstracta : (Div-exp exp1 exp2) \\
+
+
+\textbf{Especificacion Semantica :} \newline
+
+Regla: \\
+
+(value-of (Sum-exp exp1 exp2 ) $\rho$) = \\
+| \hspace{1cm} (num-val  (+ (expval→num (value-of exp1 $\rho$)) \\
+| \hspace{1cm} (expval→num (value-of exp2 $\rho$)))) \\
+
+
+(value-of (Mult-exp exp1 exp2 ) $\rho$) =\\
+| \hspace{1cm} (num-val  (* (expval→num (value-of exp1 $\rho$)) \\
+| \hspace{1cm} (expval→num (value-of exp2 $\rho$)))) \\
+
+(value-of (Div-exp exp1 exp2 ) $\rho$) =\\
+| \hspace{1cm} (num-val  (quotient  (expval→num (value-of exp1 $\rho$)) \\
+| \hspace{1cm} (expval→num (value-of exp2 $\rho$)))) \\
+
+Regla Breve: \\
+
+$$\mathcal{E}(*(exp1, exp2),\rho) = [[\mathcal{E}(exp1,\rho )] * [\mathcal{E}(exp2,\rho)]] $$
+
+$$\mathcal{E}(+(exp1, exp2),\rho) = [[\mathcal{E}(exp1,\rho )] + [\mathcal{E}(exp2,\rho)]] $$ 
+
+$$ \frac{\mathcal{E}(exp2,\rho) \not = 0}{\mathcal{E}((/(exp1, exp2),\rho)) = [[\mathcal{E}(xep1,\rho )] / [\mathcal{E}(exp2,\rho)]]} $$
+
+3.- Agrega un predicado de igualdad numerica $equal?$ y predicados de orden $greater?$ y $less?$ al conjunto de operaciones de lenguajes LET. \\
 Respuesta: \newline
 
+\textbf{Especificacion Lexica :} \newline
+
+Equal? = Equal?\\
+
+Greater? = $>$ \\
+
+less? = $<$ \\
+
+\textbf{Especificacion Sintactica :} \newline
+
+Concreta:Expression $\Rightarrow $ equal?(Expression,Expression)\\
+
+Concreta:Expression $\Rightarrow <$(Expression,Expression)\\
+
+Concreta:Expression $\Rightarrow >$(Expression,Expression)\\
+
+Abstracta:(Equal?-exp exp1 exp2)\\
+
+Abstracta:(Greater?-exp exp1 exp2)\\
+
+Abstracta:(less?-exp exp1 exp2)\\
+
+\textbf{Especificacion Semantica :} \newline
+
+Regla: \\
+
+[(value-of(equal?-exp exp1 exp2)\\
+| \hspace{1cm}(bool-val (equal? (expval→num (value-of exp1 env))\\
+| \hspace{1cm}                  (expval→num (value-of exp2 env)))))]\\
+
+[(value-of(greater?-exp exp1 exp2)\\
+| \hspace{1cm}(bool-val ($>$ (expval→num (value-of exp1 env))\\
+| \hspace{1cm}            (expval→num (value-of exp2 env)))))]\\
+
+[(value-of(less?-exp exp1 exp2)\\
+| \hspace{1cm}(bool-val ($<$ (expval→num (value-of exp1 env))\\
+| \hspace{1cm}            (expval→num (value-of exp2 env)))))]\\
+
+Regla Breve: \\
+$$
+\mathcal{E}(Equal?(exp1,exp2),\rho)
+\begin{cases}
+   \top si \: \mathcal{E}(-(exp1, \rho)(exp2,\rho)) = 0 \\
+   \bot si \: \mathcal{E}(-(exp1, \rho)(exp2,\rho)) \not = 0
+\end{cases}
+$$
+
+$$
+\mathcal{E}(>(exp1,exp2),\rho)
+\begin{cases}
+   \top si \: \mathcal{E}(-(exp1, \rho)(exp2,\rho)) > 0 \\
+   \bot si \: \mathcal{E}(-(exp1, \rho)(exp2,\rho)) \not > 0
+\end{cases}
+$$
+
+$$
+\mathcal{E}(<(exp1,exp2),\rho)
+\begin{cases}
+   \top si \: \mathcal{E}(-(exp1, \rho)(exp2,\rho)) < 0 \\
+   \bot si \: \mathcal{E}(-(exp1, \rho)(exp2,\rho)) \not < 0
+\end{cases}
+$$
 4.- Agrega opreaciones de procesamiento de listas al lenguaje, incluyendo $cons$,$car$,$cdr$,$null?$ y $emptylist$. Una lista debe poder contener cualquier valor expresado, incluyendo otra lista
 Respuesta: \newline
 
+\textbf{Especificacion Lexica :} \newline
+
+cons=cons\\
+
+car=car\\
+
+cdr=cdr\\
+
+null?=null?\\
+
+emptylist=emptylist\\
+
+
+\textbf{Especificacion Sintactica :} \newline
+
+Concreta: Expression $\Rightarrow $ cons(Expression,Expression)\\
+
+Concreta: Expression $\Rightarrow $ car(Expression)\\
+
+Concreta: Expression $\Rightarrow $ cdr(Expression)\\
+
+Concreta: Expression $\Rightarrow $ null?(Expression)\\
+
+Concreta: Expression $\Rightarrow $ emptylist()\\
+
+Abstracta: (cons-exp exp1 exp2)\\
+
+Abstracta: (car-exp exp1)\\
+
+Abstracta: (cdr-exp exp1)\\
+
+Abstracta: (null?-exp exp1)\\
+
+Abstracta: (emptylist-exp())\\ 
+
+\textbf{Especificacion Semantica :} \newline
+
+Regla: \\
+
+(Value of (cons-exp exp1 exp2) = \\
+            (pair-val (value-of exp1) \\ 
+                      (value-of exp2))) \\ 
+
+(Value of (car-exp (cons-exp exp1 exp2)) = \\
+            (value-of exp1)) \\ 
+                      
+(Value of (cdr-exp (cons-exp exp1 exp2)) = \\
+            (value-of exp2))\\
+                      
+(Value of (null?-exp exp1) = \\
+            (bool-val (if (= exp1 emptylist) $\top$ $\bot$  ))) \\
+                      
+(Value of (emptylist-exp ()) =\\
+            (emptylist))\\
+
+Regla Breve: \\
+
+
+$$
+\frac{\mathcal{E} (\: {exp1} ,  \: \rho) = val1 \: \: \mathcal{E} (exp2,\rho) = val2  }{\mathcal{E} (cons (exp1,exp2),\rho)=pair(val1,val2)}
+$$
+
+$$
+\frac{\mathcal{E} (\: {exp1} ,  \: \rho) = pair (exp1 , exp2) }{\mathcal{E} (car (exp1),\rho)= exp1}
+$$
+
+$$
+\frac{\mathcal{E} \: ({exp1} ,  \: \rho) = pair (exp1 , exp2) }{\mathcal{E} (cdr (exp1),\rho)= exp2}
+$$
+
+
+$$
+\mathcal{E}(null?(exp1),\rho)
+\begin{cases}
+   \top si \: \mathcal{E}(exp1, \rho) = emptylist \\
+   \bot si \: \mathcal{E}(exp1, \rho) \not = emptylist
+\end{cases}
+$$
+
+$$\mathcal{E}(emptylist,\rho) = emptylist $$ 
+
+
 5.- Agrega una operacion $list$ al lenguaje. Esta operacion debe tomar cualquier cantidad de argumentos y regresar un valor expresado de la lista de sus valores.\newline
 Respuesta: \newline
+
+\textbf{Especificacion Lexica :} \newline
+
+list=list\\
+
+\textbf{Especificacion Sintactica :} \newline
+
+Concreta: \\
+
+Expression = List(Expressions)\\
+
+Expressions = $\mathcal{E}$ $|$ Exp1 \\
+
+Exp1 = Expression $|$ Expression,Exp1 \\
+
+Abstracta: (list-exp exps ) \\
+
+\textbf{Especificacion Semantica :} \newline
+
+Regla: \newline
+
+(Value-of (list-exp exps) = \\
+    (if (null? (value-of exps)) \\
+        (emptylist)\\
+        (pair-val (value-of (car-exp exps)) (value-of (cdr-exp exps))))) \\
+
+
+Regla breve: \newline
+
+$$
+\frac{\mathcal{E} \: (null? (exps),\rho) = \top }{\mathcal{E} (list(exps)\rho)=emptylist}
+$$
+
+
+$$
+\frac{\mathcal{E} \: (exp1,\rho)=val1, \: \mathcal{E} (list(exp2,...)\rho)=val2 }{\mathcal{E}(list(exp1,exp2,...,expn),\rho)=pair(val1,val2)}
+$$
+
+
+
 
 7.-Incorpora al lenguaje expresiones $cond$. Usa la gramatica 
 $$ Expression \Rightarrow cond {Expression \Rightarrow Expression}* end$$
 En esta expresión, las expresiones de los lados izquierdos de los $\Rightarrow$  son evaluadas en orden
 hasta que una de ellas regresa un valor verdadero. Entonces el valor de toda la expresión es
 el valor de la expresión correspondiente al lado derecho de esa $\Rightarrow$ . Si ninguno de los lados
-izquierdos es verdadero, la expresión debe reportar un error. \newline
+izquierdos es verdadero, la expresión debe reportar un error. \textbf\newline
 Respuesta: \newline
+
+
+{Especificacion Lexica :} \newline
+
+Cond=Cond\\
+
+End=End\\ 
+
+$\Rightarrow $ = $\Rightarrow $ \\
+
+\textbf{Especificacion Sintactica :} \newline
+
+Concreta: $$ Expression \Rightarrow cond {Expression \Rightarrow Expression}* end$$ \\
+
+Abstracta: (cond-exp exps)
+
+
+\textbf{Especificacion Semantica :} \newline
+
+Regla: \\
+
+(Value-of (cond-exp exps) = \\
+        (if (value-of exp1 ) (value-of exp2) \\ 
+            (if (value-of exp3) (value-of exp4 ) \\
+                ... \\ 
+                    (if (value-of expn-1) (value-of expn) error)))) \\
+
+Regla breve :\\
+
+$$
+\frac{\mathcal{E} \: (exp1,\rho)=\top, \: \mathcal{E} (exp2,\rho)=x }{\mathcal{E}(cond(exp1,exp2,...,expn),\rho)=x}
+$$
+
+$$
+\frac{\mathcal{E} \: (exp1,\rho)=\bot, \: \mathcal{E} (cond(exp2,....),\rho)=x }{\mathcal{E}(cond(exp1,exp2,...,expn),\rho)=x}
+$$
+
+$$
+\frac{\mathcal{E} (cond(exp2,....),\rho)=error }{\mathcal{E}(cond(exp1,exp2,...,expn),\rho)=error}
+$$
 
 8.- Cambia los valores del lenguaje para que los enteros sean los unicos valores expresados. Modifica if para que le valor de 0 sea tratado como falso y todos los otros sean tratados como verdaders. Modifica los predicados de manera consistente.\newline
 Respuesta: \newline
 
-9.-Como una alternativa al ejercicio anterior, agrega una nueva categoria sintáctica $Bool-exp$ de expresiones booleanas al lenguaje. Cambia la producción para expresiones condicionales para que sea \newline
+\textbf{Especificacion Lexica :} \newline
+
+Queda igual\\
+
+\textbf{Especificacion Sintactica :} \newline
+
+Concreta: Queda igual\\
+
+Abstracta: Queda igual\\
+
+\textbf{Especificacion Semantica :} \newline
+
+Regla:\\
+
+(value-of(if-exp exp1 exp2 exp3) \\
+ (if (not (= (value-of exp1 env) 0)) \\
+     (value-of exp2 env) \\
+     (value-of exp3 env))) \\
+
+Regla breve: \\
+
 $$
-Expression \Rightarrow if Bool-exp  \: then \: Expression \: else  \:Expression
+\mathcal{E}(zero? \: (exp1) \: ,\rho) =
+\begin{cases}
+    \top \: si \: \mathcal{E}(exp1, \rho) \not = 0 \\
+    \bot \: si \: \mathcal{E}(exp1, \rho)  = 0 
+\end{cases}
 $$
 
-Escribe Producciones apropiadas para $Bool-exp$ y especifica su semantica con $Value-of-bool-exp$ (Puedes abreviarlo como $B$). ¿En dónde terminan estando los predicados del ejercico 3 con este cambio? \newline
+$$
+\mathcal{E}(if \: exp1 \: then \: exp2 \: else \: exp3,\rho) =
+\begin{cases}
+    \mathcal{E}(exp2,\rho) si \: \mathcal{E}(exp1, \rho) = 0 \\
+    \mathcal{E}(exp3,\rho) si \: \mathcal{E}(exp1, \rho) \not = 0 
+\end{cases}
+$$
+
+9.-Como una alternativa al ejercicio anterior, agrega una nueva categoria sintáctica $Bool-exp$ de expresiones booleanas al lenguaje. Cambia la producción para expresiones condicionales para que sea \newline
+
+$$
+Expression \: \Rightarrow \: if \:  Bool-exp  \: then \: Expression \: else  \:Expression
+$$
+
+Escribe Producciones apropiadas para Bool-exp y especifica su semantica con Value-of-bool-exp (Puedes abreviarlo como $B$). ¿En dónde terminan estando los predicados del ejercico 3 con este cambio? \newline
 
 Respuesta: \newline
+
+\textbf{Especificacion Lexica :} \newline
+
+Queda igual\\
+
+\textbf{Especificacion Sintactica :} \newline
+
+Concreta: Expression $\Rightarrow $ if bool-exp then Expression else Expression\\
+
+Concreta: Bool-exp $\Rightarrow$ $\top$  \\
+
+Concreta: Bool-exp $\Rightarrow$ $\bot$\\
+
+Concreta: Bool-exp $\Rightarrow$ zero?(Expression)\\ 
+
+Concreta: Bool-exp $\Rightarrow$ equal?(Expression,Expression)\\ 
+
+Concreta: Bool-exp $\Rightarrow <$ (Expression,Expression)\\ 
+
+Concreta: Bool-exp $\Rightarrow >$ (Expression,Expression)\\ 
+
+Abstracta: (if-exp bool-exp exp2 exp3)\\
+
+Abstracta: (bool-exp bool)\\
+
+Abstracta: True-exp \\
+
+Abstracta: False-exp\\
+
+Abstracta: (Zero?-boolexp exp1)\\
+
+Abstracta: (equal?-boolexp exp1, exp2)\\
+
+Abstracta: (Greater?-boolexp exp1, exp2)\\
+
+Abstracta: (less?-boolexp exp1, exp2)\\
+
+\textbf{Especificacion Semantica :} \newline
+
+(value-of (bool-exp $B$) = (bool-val $B$))
+
+$$
+\mathcal{E}(if \: bool exp then \: exp2 \: else \: exp3,\rho) =
+\begin{cases}
+    \mathcal{E}(exp2,\rho) si \: \mathcal{E}(boolexp, \rho) = Trueexp \\
+    \mathcal{E}(exp3,\rho) si \: \mathcal{E}(boolexp, \rho) = Falseexp 
+\end{cases}
+$$
 
 10.-Modifica la implementacion del intérprete agragando una nueva operacion $print$ que tome un argumento, lo imprime y regresa el entero 1. ¿Por qué esta operacion no es expresable en nuestro metodo de especificacion formal? \newline
 Respuesta: \newline
+
+La operacion $print$ no puede ser expresado de manera sencilla en los metodos utilizados de especificacion formal debido a el efecto que tiene la operacion $print$ dentro del interprete, teniendo un efecto que no se puede defiinir de manera sencilla dentro de la especificaciones, siendo esta la de imprimir en la consola, la especificacion formal se centra en la relacion logica de entradas y salidas de las operaciones, el imprimir no se puede modelar facilmente en terminos de entradas y salidas predecibles.\\
+
+El imprimir agrega un componente no determinista a la especificacion formal, ya que depende directamente del entorno externo (la consola), alejandose de las propiedades matematicas y logicas de las funciones. \\
 
 11.-Extiende el lenguaje para que las expresiones $let$ puedan vincular una cantidad arbitraria de variables, usando la produccion,\newline
 $$
@@ -73,15 +441,131 @@ Expression \Rightarrow  let \: \{ identifier = Expression* \}   \: in \: Express
 $$
 Respuesta: \newline
 
+\textbf{Especificacion Lexica :} \newline
+
+Queda igual \\
+
+\textbf{Especificacion Sintactica :} \newline
+
+
+Concreta: Expression $\Rightarrow$ let \{ identifier = Expression\}* in Expression \\
+
+Concreta: iden-Exps  $\Rightarrow \mathcal{E}$ $|$ iden-Exp \\
+
+Concreta: iden-Exp $\Rightarrow$ identifier Expression $|$ identifier Expression iden-Exp \\
+
+Abstracta: (let-exp iden-Exps rest) \\
+
+
+\textbf{Especificacion Semantica :} \newline
+
+Reglas: \\
+
+(value-of (let-exps iden-Exps body) $\rho$) = \\ 
+  (value-of body (extend-env $\rho$ identifier1 (value-of Expression1 $\rho$)) \\
+                  (extend-env $\rho$ identifier2 (value-of Expression2 $\rho$)) \\
+                  ...) \\
+
+
+Reglas breves: \\
+
+$$
+\frac{\mathcal{E} \: (exp1,\rho)=val1 \:,...,\: \mathcal{E} (expN,\rho)=valN}{\mathcal{E}(let \{ id = exp1,...,idN = expN \} \: in \: body, \rho) = \mathcal{E}(body, [id1 : val1,..., idN : valN]\rho)}
+$$
+
+
+
 12.- Extiende el lenguaje con unan expression Let* que funciona como en racket.\newline
 Respuesta: \newline
 
-13.- Agrega una expresion al lenguaje de acuerdo a la siguiente regla\newline
+\textbf{Especificacion Lexica :} \newline
 
+Let* = Let* \\
+
+\textbf{Especificacion Sintactica :} \newline
+
+Concreta: Expression $\Rightarrow$ let \{ identifier = Expression\}* in Expression \\
+
+Concreta: iden-Exps  $\Rightarrow \mathcal{E}$ $|$ iden-Exp \\
+
+Concreta: iden-Exp $\Rightarrow$ identifier Expression $|$ identifier Expression iden-Exp \\
+
+Abstracta: (let-exp* iden-Exps rest) \\
+
+\textbf{Especificacion Semantica :} \newline
+
+Reglas: \\
+
+(value-of (let*-exps iden-Exps body) $\rho$) = \\
+  (value-of body (extend-env $\rho$ identifier1 (value-of Expression1 $\rho$)) \\
+                 (extend-env $\rho$ identifier2 (value-of Expression2 \\
+                                                (extend-env $\rho$ identifier1 (value-of Expression1 $\rho$))))\\
+                 ...\\
+                 (extend-env $\rho$ identifierN (value-of ExpressionN \\
+                                                (extend-env $\rho$ identifierN-1 (value-of ExpressionN-1 ... \\ 
+                                                (extend-env $\rho$ identifier1 (value-of Expression1 $\rho$)))))))\\
+
+
+Reglas breves: \\
+
+$$ 
+\frac{\mathcal{E}(exp_1, \rho) = val_1, \: ... \: , \: \mathcal{E}(exp_N, [id_1 : val_1, \: ... \: , \: id_{N-1} : val_{N-1}]\rho) = val_N}{\mathcal{E} (let*  \: \{ id_1 = exp_1, \: ... \: , \: id_N = exp_N \} \: in  \: body , \rho) = \mathcal{E}(body, id_1 : val_1, \: ... \: , \: id_N : val_N)\rho} 
 $$
-Expression \Rightarrow  unpack \:\: \:  \{identifier\}* = Expression \:\:  in \: \:Expression
+
+13.- Agrega una expresion al lenguaje de acuerdo a la siguiente regla\newline
+$$
+Expression \Rightarrow  unpack \:\: \:  \{Identifier\}* = Expression \:\:  in \: \:Expression
 $$
 
 tal que unpack x y z = lst in ... vincula x , y y z a los elementos de lst si lst es una lista con exactamente tres elementos, reportando un error en otro caso.\newline
 Respuesta: \newline
+
+\textbf{Especificacion Lexica :} \newline
+
+unpack = unpack \\
+
+\textbf{Especificacion Sintactica :} \newline
+
+Concreta: Expression $\Rightarrow$  unpack \{Identifier\}* = Expression   in Expression \\
+
+Concreta: iden-list $\Rightarrow \mathcal{E}$ $|$ iden-list iden-Exp \\
+
+Concreta: iden-Exp $\Rightarrow$ Identifier $|$ Identifier, iden-Exp \\
+
+Abstracta: (Unpack-exp Exp1 exp body) \\
+
+
+\textbf{Especificacion Semantica :} \newline
+
+Reglas:\\
+
+(value-of (unpack-exps iden-Exps exp body) $\rho$) = \\
+  (match (value-of exp $\rho$) \\
+    ((pair val1 rest) (value-of body \\
+                        (extend-env $\rho$ id1 val1) (extend-env $\rho$ id2 rest) ... (extend-env $\rho$ idN rest))) \\
+    (emptylist (value-of body \\
+                        (extend-env $\rho$ id1 emptylist) (extend-env $\rho$ id2 emptylist) ... (extend-env $\rho$ idN emptylist)))\\
+    (else error))\\
+
+Reglas breves: \\
+$$ 
+\frac{\mathcal{E}(Exp1,\rho) = pair(val1,rest)}{\mathcal{E}(unpack((id ... idN) exp1 body)) = \mathcal{L}(list (id,...,idN), pair(val1,rest),body,\rho)}
+$$
+
+$$
+\frac{\mathcal{E}(Exp,\rho) =val \: \mathcal{E}(body,\rho) =Val}{\mathcal{E}(unpack(() \: exp \: body)\rho) = val}
+$$
+
+$$
+\frac{\mathcal{E}(body,\rho) =Val}{\mathcal{E}(unpack(() \: () \: body)\    rho) = val}
+$$
+
+$$
+\frac{\mathcal{E}Exp1,\rho = emptylist}{\mathcal{E}(\text{Exp1}, \rho) = \text{[Exp1 : emptylist]}\rho}
+$$
+
+$$
+\frac{\mathcal{E}(Exp1,\rho) \neq \text{pair}(val1, \text{rest}) \quad \mathcal{E}(Exp1,\rho) \neq \text{list}(...)}{\mathcal{E}(\text{unpack}((id ... idN) \: Exp1 \: body)) = \text{error}}
+$$
+
 \end{document}

@@ -13,6 +13,21 @@
     [_
      (error (format "Expected program but got ~a" pgm))]))
 
+(define (printval val)
+  (match val
+    [(num-val x)   (printf "~a" x)]
+    [(bool-val x)  (printf "~a" (if x "#t" "#f"))]
+    [(pair-val x)  (print-pair x)]
+    [(null-val)    (printf "()")]
+    [_             (printf "Wtf is this!?")]))
+
+(define (print-pair pair)
+  (printf "(")
+  (printval (car pair))
+  (print-list (cdr pair))
+  (printf ")"))
+
+
 (define (value-of exp env)
   (match exp
     [(const-exp num)
@@ -42,22 +57,23 @@
     [(less?-exp exp1 exp2)
      (bool-val (> (expval->num (value-of exp1 env))
                   (expval->num (value-of exp2 env))))]
-
-
+    [(null?-exp exp1)
+      (bool-val (equal? (value-of exp1 env) null-val))]
     [(cons-exp exp1 exp2)
      (let ([val1 (value-of exp1 env)]
            [val2 (value-of exp2 env)])
        (pair-val (cons val1 val2)))]
-     
-     
     [(car-exp exp1)
-     (let ([pair-val (exp1)])
-       (car (pair-val)))]
-
+     (let ([val (value-of exp1 env)])
+       (match val
+         [(pair-val x) (car x)]))]
+    [(cdr-exp exp1)
+     (let ([val (value-of exp1 env)])
+       (match val
+         [(pair-val x) (cdr x)]))]
     [(emptylist-exp)
-     (emptylist-val)]
-
-    [(list-exp)
+     (null-val)]
+   [(list-exp)
     ()]
 
 
@@ -69,6 +85,11 @@
      (value-of body (extend-env var (value-of exp1 env) env))]
     [(minus-exp exp1)
      (num-val (- 0 (expval->num (value-of exp1 env))))]
+    [(print-exp exp1)
+     (printf "\"")
+     (printval (value-of exp1 env))
+     (printf "\"\n")
+     (num-val 1)]
     [_
      (error (format "Expected expression but got ~a" exp))]))
 

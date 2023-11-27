@@ -18,6 +18,7 @@
 (struct mult-token token () #:transparent)
 (struct div-token token () #:transparent)
 (struct comma-token token () #:transparent)
+(struct print-token token () #:transparent)
 (struct cons-token token () #:transparent)
 (struct car-token token () #:transparent)
 (struct cdr-token token () #:transparent)
@@ -49,6 +50,7 @@
   [struct mult-token ()]
   [struct div-token ()]
   [struct comma-token ()]
+  [struct print-token ()]
   [struct cons-token  ()]
   [struct car-token  ()]
   [struct cdr-token  ()]

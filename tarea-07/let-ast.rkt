@@ -13,6 +13,7 @@
 (struct equal?-exp expression (exp1 exp2) #:transparent)
 (struct greater?-exp expression (exp1 exp2) #:transparent)
 (struct less?-exp expression (exp1 exp2) #:transparent)
+(struct print-exp expression (exp1) #transparent)
 (struct cons-exp expression (exp1 exp2) #:transparent)
 (struct car-exp expression (exp1) #:transparent)
 (struct cdr-exp expression (exp1) #:transparent)
@@ -37,6 +38,7 @@
   [struct equal?-exp ((exp1 expression?) (exp2 expression?))]
   [struct greater?-exp ((exp1 expression?) (exp2 expression?))]
   [struct less?-exp ((exp1 expression?) (exp2 expression?))]
+  [struct print-exp ((exp1 expression?))]
   [struct cons-exp ((exp1 expression?) (exp2 expression?))]
   [struct car-exp ((exp1 expression?))]
   [struct cdr-exp ((exp1 expression?))]

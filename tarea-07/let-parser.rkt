@@ -32,6 +32,7 @@
                     [(add-token) "add operator"]
                     [(mult-token) "multiplication operator"]
                     [(div-token) "division operator"]
+                    [(print-token) "print keyword"]
                     [(cons-token) "cons operator"]
                     [(car-token) "car operator"]
                     [(cdr-token) "cdr operator"]
@@ -92,6 +93,11 @@
                          (guard (expect-sugar comma-token?) "a comma")
                          (guard parse-expression "an expression")
                          (guard (expect-sugar close-paren-token?) "close parenthesis"))
+               (parse/seq print-exp
+                         (expect-sugar print-token?)
+                         (guard (expect-sugar open-paren-token?) "open parenthesis")
+                         (guard parse-expression "an expression")
+                         (guard (expect-sugar close-paren-token?) "close parenthesis")))
               (parse/seq cons-exp
                          (expect-sugar cons-token?)
                          (guard (expect-sugar open-paren-token?) "open parenthesis")
